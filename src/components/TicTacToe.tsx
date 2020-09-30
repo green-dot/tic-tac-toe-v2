@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import components
 import Board from './Board';
+import ScoreBoard from './ScoreBoard';
 // styles
 import {TicTacToeWrapper} from './TicTacToe.styles';
 import { BoardWrapper } from './Board.styles';
@@ -107,19 +108,7 @@ const TicTacToe = () => {
   return (
     <TicTacToeWrapper>
       <h2>Tic-Tac-Toe</h2>
-      {!gameOver && (
-        <h3>Next Move: Player {currentPlayer +1}</h3>
-        )}
-      {gameOver && (
-        <div>
-          <h3>Game Over!</h3> 
-          <p>Scores:</p>
-          <p>Player 1 -  {playerOneScore}</p>
-          <p>Player 2 -  {playerTwoScore}</p>
-          <p>Ties -  {numberOfTies}</p>
-          <button onClick={restartGame}>Restart</button>
-        </div>
-      )}
+      <ScoreBoard />
       <Board 
         onSquareClick={cellClicked}
         boardState={boardState}

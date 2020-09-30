@@ -17,6 +17,7 @@ const Board: React.FC<BoardProps> = ({boardState, onSquareClick}) => {
       {row.map((cell, cellInd) => (
         <CellWrapper
           key={cellInd}
+          className={'winner'}
           defaultValue={`${rowInd},${cellInd}`}
           onClick={() => onSquareClick(rowInd, cellInd)}
         >

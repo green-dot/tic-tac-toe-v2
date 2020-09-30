@@ -17,6 +17,10 @@ export const RowWrapper = styled.div`
   align-items: stretch;
 `;
 
+type CellWrapperProps = {
+  backgroundColor: string
+}
+
 export const CellWrapper = styled.div`
   flex-grow: 1;
   display: flex;
