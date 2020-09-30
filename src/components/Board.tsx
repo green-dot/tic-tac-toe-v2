@@ -26,24 +26,6 @@ const Board: React.FC<BoardProps> = ({boardState, onSquareClick}) => {
     </RowWrapper>
   ))
 
-  // const board = Array(length).fill(0).map((row, rowInd) => {
-  //   return <RowWrapper key={rowInd}>
-  //           { Array(length).fill(rowInd).map((rowInd, colInd) => {
-  //               return (
-  //                 <CellWrapper
-  //                   key={rowInd*length + colInd}
-  //                   onClick={() => onSquareClick((rowInd*length + colInd).toString())}
-  //                 >
-  //                   {rowInd*length + colInd}
-  //                 </CellWrapper>
-  //               )
-  //             })
-  //           }
-  //         </RowWrapper>
-  // })
-
-  console.log('board')
-
   return (
     <>
       <BoardWrapper>

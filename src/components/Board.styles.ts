@@ -23,9 +23,10 @@ export const CellWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border: 2px solid black;
-  min-width: 50px;
-  min-height: 50px;
+  min-width: 100px;
+  min-height: 100px;
   width: 0;
+  font-size: 64px;
 
   :hover {
     background-color: lightgreen;
