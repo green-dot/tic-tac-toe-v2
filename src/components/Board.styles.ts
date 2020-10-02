@@ -17,7 +17,7 @@ export const RowWrapper = styled.div`
   align-items: stretch;
 `;
 
-export const CellWrapper = styled.div`
+const BaseCellWrapper = styled.div`
 
   flex-grow: 1;
   display: flex;
@@ -28,13 +28,16 @@ export const CellWrapper = styled.div`
   min-height: 100px;
   width: 0;
   font-size: 64px;
+`;
 
+
+export const CellWrapper = styled(BaseCellWrapper)`
   :hover {
     background-color: lightgreen;
     cursor: pointer;
   }
-`;
+`
 
-export const WinningCellWrapper = styled(CellWrapper)`
-  background-color: goldenrod
+export const WinningCellWrapper = styled(BaseCellWrapper)`
+  background-color: goldenrod;
 `;

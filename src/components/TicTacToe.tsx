@@ -38,8 +38,8 @@ const TicTacToe = () => {
   }
 
   function restartGame(): void {
-    const newGameState = initializeBoardState(BOARD_LENGTH)
-    setBoardState(newGameState);
+    setBoardState(initializeBoardState(BOARD_LENGTH));
+    setBoardClasses(initializeBoardState(BOARD_LENGTH));
     setGameOver(false);
   }
 
@@ -87,8 +87,43 @@ const TicTacToe = () => {
 
   }
 
-  function findAndUpdateWinningSquareClasses(): void {
+  function findAndUpdateWinningSquareClasses(winningSym: string): void {
+    const tempBoardClasses = JSON.parse(JSON.stringify(boardClasses));
+    const winningClass = 'winner';
 
+    if(checkRowWinner(winningSym)){
+      for (let i=0; i<tempBoardClasses.length; i++){
+        let rowWinner = boardState[i].reduce((matched: boolean, cell) => (matched && cell === winningSym), true)
+        if(rowWinner){
+          for(let j=0; j<tempBoardClasses.length; j++){
+            tempBoardClasses[i][j] = winningClass;
+          }
+        }
+      }
+
+    }
+    else if(checkColumnWinner(winningSym)){
+      for (let i=0; i<tempBoardClasses.length; i++){
+        let colWinner = boardState.reduce((matched: boolean, row) => (matched && row[i] === winningSym), true)
+        if(colWinner){
+          for(let j=0; j<tempBoardClasses.length; j++){
+            tempBoardClasses[j][i] = winningClass;
+          }
+        }
+      }
+    }
+    else if(checkBackSlashWinner(winningSym)){
+      for(let i=0; i<tempBoardClasses.length; i++){
+        tempBoardClasses[i][i] = winningClass;
+      }
+    }
+    else if(checkForwardSlashWinner(winningSym)){
+      for(let i=0; i<tempBoardClasses.length; i++){
+        tempBoardClasses[i][tempBoardClasses.length - 1 - i] = winningClass;
+      }
+    }
+
+    setBoardClasses(tempBoardClasses)
   }
 
   useEffect(()=>{
@@ -99,12 +134,12 @@ const TicTacToe = () => {
     if(playerOneWins){
       setGameOver(true);
       setPlayerOneScore(prev => prev + 1);
-      findAndUpdateWinningSquareClasses()
+      findAndUpdateWinningSquareClasses('X')
     } 
     else if (playerTwoWins){
       setGameOver(true);
       setPlayerTwoScore(prev => prev + 1);
-      findAndUpdateWinningSquareClasses()
+      findAndUpdateWinningSquareClasses('O')
     } 
     else if(isBoardFilled()) {
       setGameOver(true)
