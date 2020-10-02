@@ -5,8 +5,8 @@ export const BoardWrapper = styled.div`
   flex-direction: column;
   border: 2px solid black;
   box-sizing: border-box;
-  min-width: 450px;
-  min-height: 450px;
+  min-width: 400px;
+  min-height: 400px;
 `;
 
 export const RowWrapper = styled.div`
@@ -17,11 +17,8 @@ export const RowWrapper = styled.div`
   align-items: stretch;
 `;
 
-type CellWrapperProps = {
-  backgroundColor: string
-}
-
 export const CellWrapper = styled.div`
+
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -36,4 +33,8 @@ export const CellWrapper = styled.div`
     background-color: lightgreen;
     cursor: pointer;
   }
+`;
+
+export const WinningCellWrapper = styled(CellWrapper)`
+  background-color: goldenrod
 `;

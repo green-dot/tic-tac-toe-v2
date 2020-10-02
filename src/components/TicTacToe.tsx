@@ -11,7 +11,7 @@ const BOARD_LENGTH = 3;
 const Markers = ['X', 'O']
 
 function initializeBoardState (boardLength: number): string[][] {
-  const boardState = Array(boardLength).fill(0).map(_ => (
+  const boardState = Array(boardLength).fill(0).map( _ => (
     Array(boardLength).fill('')
   ))
   return boardState
@@ -20,6 +20,7 @@ function initializeBoardState (boardLength: number): string[][] {
 const TicTacToe = () => {
 
   const [boardState, setBoardState] = useState<string[][]>(() => initializeBoardState(BOARD_LENGTH))
+  const [boardClasses, setBoardClasses] = useState<string[][]>(() => initializeBoardState(BOARD_LENGTH))
   const [currentPlayer, setCurrentPlayer] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false)
   const [playerOneScore, setPlayerOneScore] = useState<number>(0)
@@ -70,7 +71,7 @@ const TicTacToe = () => {
     }, true)
   }
 
-  function playerWins( sym: string): boolean{
+  function playerWins(sym: string): boolean{
     const rowWinner = checkRowWinner(sym);
     const colWinner = checkColumnWinner(sym);
     const backSlashWinner = checkBackSlashWinner(sym)
@@ -86,6 +87,10 @@ const TicTacToe = () => {
 
   }
 
+  function findAndUpdateWinningSquareClasses(): void {
+
+  }
+
   useEffect(()=>{
     // check for winners 
     const playerOneWins: boolean = playerWins(Markers[0]);
@@ -94,10 +99,12 @@ const TicTacToe = () => {
     if(playerOneWins){
       setGameOver(true);
       setPlayerOneScore(prev => prev + 1);
+      findAndUpdateWinningSquareClasses()
     } 
     else if (playerTwoWins){
       setGameOver(true);
       setPlayerTwoScore(prev => prev + 1);
+      findAndUpdateWinningSquareClasses()
     } 
     else if(isBoardFilled()) {
       setGameOver(true)
@@ -108,11 +115,22 @@ const TicTacToe = () => {
   return (
     <TicTacToeWrapper>
       <h2>Tic-Tac-Toe</h2>
-      <ScoreBoard />
+      <ScoreBoard 
+        playerOneScore={playerOneScore}
+        playerTwoScore={playerTwoScore}
+        numOfTies={numberOfTies}
+        playersTurn={currentPlayer}
+      />
       <Board 
         onSquareClick={cellClicked}
         boardState={boardState}
-        />
+        boardClasses={boardClasses}
+      />
+      {gameOver &&
+        <button onClick={restartGame}>
+          Play Again!
+        </button>
+      }
     </TicTacToeWrapper>
     )
 };

@@ -5,4 +5,13 @@ export const TicTacToeWrapper = styled.div`
   flex-direction: column;
   justify-content: stretch;
   align-items: center;
+
+  button {
+    font-size: 18px;
+    padding: 18px;
+    margin: 12px;
+    border-radius: 12px;
+    background-color: palegreen;
+
+  }
 `;
